@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post #1</title>
+</head>
+<body>
+    <h1>Welcome to the Color Personality Game!</h1>
+    <h2></h2>
+    <h3>Say hi to your deaf old Grandpa!</h3>
+    <form action="/grandpasays/" method="POST">
+        {% csrf_token %}
+        <input type="text" name="post-data" />
+        <input type="submit" value="Submit" />
+    </form>
+    <h3>{{post}}</h3>
+</body>
+</html>
