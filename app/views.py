@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from app.models import Players, Teams, Games
 
 # Create your views here.
 def index(request):
@@ -13,12 +16,20 @@ def index(request):
         }
     return render(request, 'index.html', context)
     
-def login(request):
+def register(request):
     if request.method == 'POST':
-        post = request.POST["post-data"]
-        if post == post.upper():
-            return redirect("/?grandpasays=HI GRANDPA!Red Necks Suck!")
-        elif post == post.lower():    
-            return redirect("/?grandpasays=What? I can't hear you Sonny!")
+        username = request.POST["username"]
+        password = request.POST['password']
+        
+        
+        # check if username exists
+        user = User.objects.filter(username = username)
+        if user:
+            return redirect('home')    
+        # if it exists:
+            #print username is already existed
         else:
-            return redirect("/?grandpasays=Hey Dude!")
+            user = User.objects.create(username = username, password = password)
+            player = Players.objects.create(user = user)
+            user = authenticate(username = username, password = password)
+            login(request, user)

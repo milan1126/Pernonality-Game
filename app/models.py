@@ -1,9 +1,9 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class Players(models.Model):
-    username = models.CharField(max_length = 20) 
-    password = models.CharField(max_length = 20)
+    user = models.OneToOneField(User, default = None)
     red = models.IntegerField()
     blue = models.IntegerField()
     yellow = models.IntegerField()

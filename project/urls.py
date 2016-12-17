@@ -19,6 +19,6 @@ from app import views
 
 urlpatterns = [
     url(r'^$', views.index, name='home'),
-    url(r'^login/$', views.login, name='posts'),
+    url(r'^register/$', views.register, name='register'),
     url(r'^admin/', admin.site.urls),
 ]
