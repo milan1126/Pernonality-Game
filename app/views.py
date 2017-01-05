@@ -21,7 +21,6 @@ def register(request):
         username = request.POST["username"]
         password = request.POST['password']
         
-        
         # check if username exists
         user = User.objects.filter(username = username)
         if user:
@@ -30,6 +29,8 @@ def register(request):
             #print username is already existed
         else:
             user = User.objects.create(username = username, password = password)
-            player = Players.objects.create(user = user)
+            player = Players.objects.create_player(user=user)
+            player.user = user
+            player.save()
             user = authenticate(username = username, password = password)
             login(request, user)
