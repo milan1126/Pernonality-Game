@@ -34,3 +34,13 @@ def register(request):
             player.save()
             user = authenticate(username = username, password = password)
             login(request, user)
+    return redirect('personality_test')
+    
+def personality_test(request):
+    user = request.user
+    player = Players.objects.get(user_id = user.id) 
+    return render(request, 'personality_test.html', {})
+    
+def submit(request):
+    pass
+    
